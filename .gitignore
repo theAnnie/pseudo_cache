@@ -22,3 +22,5 @@ erl_crash.dump
 # Ignore package tarball (built via "mix hex.build").
 pseudo_cache-*.tar
 
+.elixir_ls
+.DS_Store
