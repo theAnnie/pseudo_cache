@@ -1,7 +1,5 @@
 defmodule PseudoCache do
-  @moduledoc """
-  Documentation for PseudoCache.
-  """
+  @moduledoc false
 
   use GenServer
 
@@ -13,6 +11,16 @@ defmodule PseudoCache do
     GenServer.cast(pid, {:put, key, element})
   end
 
+  def put(pid, key, element, expiration) when is_number(expiration) do
+    spawn(fn ->
+      GenServer.cast(pid, {:put, key, element})
+      Process.sleep(expiration)
+      GenServer.cast(pid, {:delete, key})
+    end)
+
+    :ok
+  end
+
   def get(pid, key) do
     GenServer.call(pid, {:get, key})
   end
@@ -21,7 +29,7 @@ defmodule PseudoCache do
     GenServer.cast(pid, {:delete, key})
   end
 
-  # Server (callbacks)
+  # Server callbacks
 
   @impl true
   def init(cache) do
