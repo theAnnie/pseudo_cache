@@ -15,3 +15,8 @@ It provides four functions:
 2. put(pid, key, element, expiration) - puts k/v pair to cache and removes after expiration time.
 3. delete(pid, key) - deletes k/v pair from cache.
 4. get(pid, key) - return element associated to given key.
+
+## Testing
+```
+make test
+```
