@@ -1,21 +1,17 @@
 # PseudoCache
 
-**TODO: Add description**
+Cache like kv store implemenation made in Elixir.
 
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `pseudo_cache` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:pseudo_cache, "~> 0.1.0"}
-  ]
-end
+## How to use it?
+First of all you need to start new GenServer. You can do it with
 ```
+{:ok, pid} = PseudoCache.start_link()
+```
+It is possible to give already created map as an arugment to start_link() function (by defauly, GenServer starts with empty cache/map).
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/pseudo_cache](https://hexdocs.pm/pseudo_cache).
+It provides four functions:
 
+1. put(pid, key, element) - puts k/v pair to cache.
+2. put(pid, key, element, expiration) - puts k/v pair to cache and removes after expiration time.
+3. delete(pid, key) - deletes k/v pair from cache.
+4. get(pid, key) - return element associated to given key.
